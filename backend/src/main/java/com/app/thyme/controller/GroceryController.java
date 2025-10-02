@@ -17,14 +17,14 @@ public class GroceryController {
     @Autowired
     private GroceryService groceryService;
 
-    // Get all groceries
+    // GET /api/grocery/all
     @GetMapping("/all")
     public ResponseEntity<List<Grocery>> getAllGroceries() {
         List<Grocery> groceryList = groceryService.getAllGroceries();
         return ResponseEntity.ok(groceryList);
     }
 
-    // Get grocery by ID
+    // GET /api/grocery/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Grocery> getGroceryById(@PathVariable Long id) {
         return groceryService.getGroceryById(id)
@@ -32,7 +32,7 @@ public class GroceryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Add grocery
+    // POST /api/grocery/add
     @PostMapping("/add")
     public ResponseEntity<Grocery> addGrocery(@RequestBody GroceryRequest request) {
         try {
@@ -46,7 +46,7 @@ public class GroceryController {
         }
     }
 
-    // Update grocery
+    // PUT /api/grocery/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Grocery> updateGrocery(
             @PathVariable Long id,
@@ -63,7 +63,7 @@ public class GroceryController {
         }
     }
 
-    // Delete grocery
+    // DELETE /api/grocery/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Grocery> deleteGrocery(@PathVariable Long id) {
         try {
